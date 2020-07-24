@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Attra - Realtime Log Monitor</title>
+		<link rel="shortcut icon" href="https://www.attra.com/wp-content/uploads/2019/10/fav.png" type="image/x-icon">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+		<!-- Bulma Version 0.8.2-->
+		<link rel="stylesheet" href="https://unpkg.com/bulma@0.8.2/css/bulma.min.css" />
+		<link rel="stylesheet" type="text/css" href="forum.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+		<!-- <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    	<link href="/main.css" rel="stylesheet">
+		
+		<script src="/webjars/jquery/jquery.min.js"></script>
+		<script src="/webjars/sockjs-client/sockjs.min.js"></script>
+		<script src="/webjars/stomp-websocket/stomp.min.js"></script>
+		<script src="/app.js"></script>
+	
+	</head>
+	<body>
+		<nav class="navbar is-white topNav">
+			<div class="container">
+				<div class="navbar-brand">
+					<a class="navbar-item" href="../">
+						<img src="attralogo.png" width="112" height="28">
+					</a>
+					<div class="navbar-burger burger" data-target="topNav">
+						<span></span>
+						<span></span>
+						<span></span>
+					</div>
+				</div>
+				<div id="topNav" class="navbar-menu">
+					<div class="navbar-start">
+						<a class="navbar-item" href="#" style="padding-left:-10px; font-weight: 700; font-color:#4e5c54;">Realtime Log Monitor</a>
+						<!--a class="navbar-item" href="cover.html">Home</a>
+						<a class="navbar-item" href="landing.html">Landing</a-->
+						
+					</div>
+					
+					
+					<div class="navbar-end">
+						<div class="navbar-item">
+							<input class="input" type="search" id="search" placeholder="Search in Logs...">
+							<button id ="searchbutton" class="button is-small is-info is-outlined searchbuttons" type="submit">
+								<span class="icon">
+									<i class="fa fa-search"></i>
+								</span> 
+							</button>
+							
+							<button id="cancelsearch" class="button is-small is-info is-outlined searchbuttons" type="submit" style="display:none">
+								<span class="icon">
+									<i class="fa fa-minus"></i>
+								</span>
+							</button>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</nav>
+		
+		<section class="container">
+			<div class="columns">
+				<div class="column is-2">
+					<aside class="menu">
+						<p class="menu-label">
+							Available Servers
+						</p>
+						</p>
+						<ul class="menu-list">
+							<li><button class="button is-primary is-block is-alt is-large" data-toggle="modal" data-target="#confirmationModal">
+										<span class="icon">
+											<i class="fa fa-server"></i>
+										</span> <span> Customer Portal </span>
+										</button></li>
+							<li><button class="button is-primary is-block is-alt is-large" data-toggle="modal" data-target="#confirmationModal">
+										<span class="icon">
+											<i class="fa fa-server"></i>
+										</span> <span> File Processoor </span> </span> 
+										</button></li>
+							<li><button class="button is-primary is-block is-alt is-large" data-toggle="modal" data-target="#confirmationModal">
+										<span class="icon">
+											<i class="fa fa-server"></i>
+										</span> <span> Cardholder Portal </span> 
+										</button></li>
+							<li><button class="button is-primary is-block is-alt is-large" data-toggle="modal" data-target="#confirmationModal">
+										<span class="icon">
+											<i class="fa fa-server"></i>
+										</span> <span> Agent Portal </span> 
+										</button></li>
+							<li><button class="button is-primary is-block is-alt is-large" data-toggle="modal" data-target="#confirmationModal">
+										<span class="icon">
+											<i class="fa fa-server"></i>
+										</span> <span> Device API </span> 
+										</button></li>
+							<li><button class="button is-primary is-block is-alt is-large" data-toggle="modal" data-target="#confirmationModal">
+										<span class="icon">
+											<i class="fa fa-server"></i>
+										</span> <span> DB Batch Trace </span>
+										</button></li>
+						</ul>
+					</aside>
+				</div>
+				<div class="column is-10">
+					<div class="navbar-end">
+						<div class="navbar-item">
+							<div class="field is-grouped">			
+								<p class="control">
+									<button class="button is-small is-info is-outlined">
+										<span class="icon">
+											<i class="fa fa-refresh"></i>
+										</span>
+										<span>Refresh</span>
+									</button>
+									<button id="disconnect" class="button is-small is-info is-outlined" type="submit">
+										<span class="icon">
+											<i class="fa fa-chain-broken"></i>
+										</span>
+										<span>Disconnect</span>
+									</button>
+								</p>
+							</div>
+						</div>
+					</div>
+					<div class="box content scrollable">
+						<table id="conversation" class="table table-striped">
+								<thead>
+								</thead>
+									<tbody id="greetings">
+								</tbody>
+							</table>	
+					</div>
+				</div>
+			</div>
+			
+			<div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog" role="document">
+				<div class="modal-content">
+				  <div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Connect Confirmation</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  <div class="modal-body">
+					Are you sure you want to connect ?
+				  </div>
+				  <div class="modal-footer">
+					<button type="submit" class="btn btn-primary" id="connect">Connect</button>
+					<button type="submit" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				  </div>
+				</div>
+			  </div>
+			</div>
+		</section>
+		<!-- <footer class="footer">
+			<div class="container">
+				<div class="content has-text-centered">
+					<div class="columns is-mobile is-centered">
+						div class="field is-grouped is-grouped-multiline">
+							<div class="control">
+								<div class="tags has-addons">
+									<a class="tag is-link" href="https://github.com/BulmaTemplates/bulma-templates">Bulma Templates</a>
+									<span class="tag is-light">Daniel Supernault</span>
+								</div>
+							</div>
+							<div class="control">
+								<div class="tags has-addons">
+									<a class="tag is-link">The source code is licensed</a>
+									<span class="tag is-light">MIT &nbsp;<i class="fa fa-github"></i></span>
+								</div>
+							</div>
+						</div
+					</div>
+				</div>
+			</div>
+		</footer> -->
+		<script async type="text/javascript" src="bulma.js"></script>
+	</body>
+</html>

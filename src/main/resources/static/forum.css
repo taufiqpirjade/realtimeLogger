@@ -1,0 +1,117 @@
+html,body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  background: #F2F6FA;
+}
+footer {
+  background-color: #F2F6FA !important;
+}
+.container {
+	max-width: 100% !important;
+}
+.topNav {
+  border-top: 5px solid #ee3524;
+}
+.topNav .container {
+  border-bottom: 1px solid #E6EAEE;
+}
+.container .columns {
+  /* margin: 3rem 0; */
+  height: 620px;
+}
+.navbar-menu .navbar-item {
+  padding: 0 2rem;
+}
+
+.navbar-end {
+	margin-left:5px;
+}
+.navbar-item img {
+    max-height: 2.50rem !important;
+}
+aside.menu {
+  //padding-top: 3rem;
+}
+aside.menu .menu-list {
+  line-height: 1.5;
+}
+aside.menu .menu-label {
+  padding-left: 10px;
+  font-weight: 700;
+}
+.button.is-primary.is-alt {
+  background: #ee3524;
+  background: -webkit-linear-gradient(to bottom, #0072ff, #00c6ff);
+  //background: linear-gradient(to bottom, #0072ff, #00c6ff);
+  font-weight: 700;
+  font-size: 14px;
+  height: 2rem;
+  line-height: 1.0;
+}
+.media-left img {
+  border-radius: 50%;
+}
+.media-content p {
+  font-size: 14px;
+  line-height: 2.3;
+  font-weight: 700;
+  color: #8F99A3;
+}
+article.post {
+  margin: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #E6EAEE;
+}
+article.post:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+.menu-list li{
+  padding: 5px;
+}
+
+.button.is-info.is-outlined.is-focused, .button.is-info.is-outlined.is-hovered, .button.is-info.is-outlined:focus, .button.is-info.is-outlined:hover {
+    background-color: #ee3524 !important;
+    border-color: #ee3524 !important;
+    color: #fff !important;
+}
+
+.button.is-info.is-outlined {
+    background-color: transparent;
+    border-color: #4e5c54;
+    color: #4e5c54;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #ee3524 !important;
+    border-color: #ee3524 !important;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #ee3524 !important;
+    border-color: #ee3524 !important;
+}
+
+.modal-header {
+	background-color: #f72b1836;
+}
+
+.input {
+height: 2em;
+}
+
+.searchbuttons {
+	margin-left: 10px;
+}
+
+.scrollable {
+	overflow: scroll;
+    height: 620px;
+}
+
+.content table td {
+	padding: .20em .50em !important;
+	font-size: 13px !important;
+}
+}
