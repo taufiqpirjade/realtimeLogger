@@ -9,7 +9,7 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
+    $("#messages").html("");
 }
 
 function connect() {
@@ -18,8 +18,8 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/greetings', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
+        stompClient.subscribe('/topic/messages', function (greeting) {
+            showMessages(JSON.parse(greeting.body).content);
         });
     });
     $("#confirmationModal .close").click();
@@ -37,8 +37,8 @@ function sendName() {
     stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
-function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+function showMessages(message) {
+    $("#messages").append("<tr><td>" + message + "</td></tr>");
 }
 
 $(function () {
@@ -76,7 +76,7 @@ $(function () {
   
 
 function searchData(value) {  
-    $('#greetings tr').each(function() {
+    $('#messages tr').each(function() {
          var found = 'false';  
          $(this).each(function(){  
               if($(this).text().toLowerCase().indexOf(value.toLowerCase()) >= 0) {  
@@ -93,7 +93,7 @@ function searchData(value) {
 }
 
 function eraseSearch() {
-    $('#greetings tr').each(function() {
+    $('#messages tr').each(function() {
          var found = 'false';  
          $(this).each(function(){  
         	 $(this).show();  
